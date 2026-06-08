@@ -1,16 +1,143 @@
-# React + Vite
+# AutoDoc Peru — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interfaz React + Vite + Tailwind CSS para el sistema de extracción automática de documentos.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+* React 18 + Vite
+* Tailwind CSS v4
+* Axios (comunicación con el backend)
+* SheetJS / xlsx (exportación a Excel)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Instalación local
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Instalar dependencias
+
+```bash
+npm install
+```
+
+### 2. Crear archivo `.env`
+
+```env
+VITE_API_URL=http://localhost:8000
+```
+
+### 3. Ejecutar el proyecto
+
+```bash
+npm run dev
+```
+
+Aplicación disponible en:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Variables de entorno
+
+### Desarrollo local
+
+```env
+VITE_API_URL=http://localhost:8000
+```
+
+### Producción
+
+Configurar la URL del backend desplegado en Render:
+
+```env
+VITE_API_URL=https://tu-backend.onrender.com
+```
+
+---
+
+## Estructura del proyecto
+
+```
+frontend/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── App.jsx
+│   └── main.jsx
+├── public/
+├── .env
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+---
+
+## Funcionalidades
+
+* Selector de tipo de documento:
+
+  * Factura
+  * Recibo de Luz
+  * Asistencia Laboral
+
+* Carga de archivos mediante:
+
+  * Selección manual
+  * Drag & Drop
+
+* Visualización de datos extraídos en tabla
+
+* Edición manual de registros
+
+* Filtro por nombre o razón social
+
+* Exportación de resultados a Excel mediante SheetJS
+
+* Mensajes de error descriptivos para el usuario
+
+---
+
+## Deploy en Vercel
+
+### 1. Crear cuenta
+
+https://vercel.com
+
+### 2. Importar proyecto
+
+* New Project
+* Importar repositorio GitHub del frontend
+
+### 3. Configurar variables de entorno
+
+Agregar:
+
+```env
+VITE_API_URL=https://tu-backend.onrender.com
+```
+
+### 4. Deploy
+
+Vercel generará automáticamente una URL pública y realizará nuevos despliegues con cada push al repositorio.
+
+---
+
+## Comunicación con el Backend
+
+El frontend consume la API REST desarrollada en FastAPI mediante Axios.
+
+Ejemplo:
+
+```text
+Frontend (Vercel)
+        ↓
+FastAPI Backend (Render)
+        ↓
+Supabase (Base de datos + Storage)
+```
